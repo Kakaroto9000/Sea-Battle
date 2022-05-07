@@ -13,7 +13,7 @@ namespace SeaBattle
         public char[,] PreviosCoardinate;
 
         public Ship[] Ships;
-        private ShipsManager shipsManager = new ShipsManager();
+        private ShipsMoving shipsManager = new ShipsMoving();
         static InputManager inputManager = new InputManager();
 
         public (int x, int y) ArenaSize = (10, 10);
@@ -134,7 +134,7 @@ namespace SeaBattle
                 return("Error");
             else if (Direction == "Up")
             {
-                if (GetShipCord("y",NumbOfShip) != 1)
+                if (Ships[NumbOfShip].Coardinate.y != 1)
                     return ("Up");
                 else
                 {
@@ -145,14 +145,14 @@ namespace SeaBattle
             else if (Direction == "Down")
             {
                 if (Ships[NumbOfShip].rotation == false)
-                    if (GetShipCord("y", NumbOfShip) + Ships[NumbOfShip].lenghts != ArenaSize.y)
+                    if (Ships[NumbOfShip].Coardinate.y + Ships[NumbOfShip].lenghts != ArenaSize.y)
                         return ("Down");
                     else
                     {
                         return ("Error");
                     }
                 else 
-                    if (GetShipCord("y", NumbOfShip) != ArenaSize.y-1)
+                    if (Ships[NumbOfShip].Coardinate.y != ArenaSize.y-1)
                         return ("Down");
                     else
                     {
@@ -162,7 +162,7 @@ namespace SeaBattle
             }
             else if (Direction == "Left")
             {
-                if (GetShipCord("x", NumbOfShip) != 1)
+                if (Ships[NumbOfShip].Coardinate.x != 1)
                     return ("Left");
                 else
                 {
@@ -173,7 +173,7 @@ namespace SeaBattle
             else if (Direction == "Right")
             {
                 if (Ships[NumbOfShip].rotation == true)
-                    if (GetShipCord("x", NumbOfShip) + Ships[NumbOfShip].lenghts != ArenaSize.x)
+                    if (Ships[NumbOfShip].Coardinate.x + Ships[NumbOfShip].lenghts != ArenaSize.x)
                         return("Right");
                     else
                     {
@@ -181,7 +181,7 @@ namespace SeaBattle
                         return ("Error");
                     }
                 else
-                    if (GetShipCord("x", NumbOfShip) != ArenaSize.x - 1)
+                    if (Ships[NumbOfShip].Coardinate.x != ArenaSize.x - 1)
                         return ("Right");
                     else
                     {
@@ -192,7 +192,7 @@ namespace SeaBattle
             else if (Direction == "Rotate")
             {
                 if (Ships[NumbOfShip].rotation == false)
-                    if (GetShipCord("x", NumbOfShip) + Ships[NumbOfShip].lenghts <= ArenaSize.x)
+                    if (Ships[NumbOfShip].Coardinate.x + Ships[NumbOfShip].lenghts <= ArenaSize.x)
                         return("Rotate");
                     else
                     {
@@ -200,7 +200,7 @@ namespace SeaBattle
                         return ("Error");
                     }
                 else
-                    if (GetShipCord("y", NumbOfShip) + Ships[NumbOfShip].lenghts <= ArenaSize.y)
+                    if (Ships[NumbOfShip].Coardinate.y + Ships[NumbOfShip].lenghts <= ArenaSize.y)
                         return ("Rotate");
                     else
                     {

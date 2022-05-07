@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SeaBattle
 {
-    public class ShipsManager
+    public class ShipsMoving
     {
         public void ShipCreation(int i, ref Ship[] Ships)
         {
