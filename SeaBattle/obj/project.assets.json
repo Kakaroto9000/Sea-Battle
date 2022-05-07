@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sergi\\source\\repos\\SeaBattle\\SeaBattle\\SeaBattle.csproj",
+      "projectUniqueName": "C:\\Homework\\SeaBattle\\Sea-Battle\\SeaBattle\\SeaBattle.csproj",
       "projectName": "SeaBattle",
-      "projectPath": "C:\\Users\\sergi\\source\\repos\\SeaBattle\\SeaBattle\\SeaBattle.csproj",
+      "projectPath": "C:\\Homework\\SeaBattle\\Sea-Battle\\SeaBattle\\SeaBattle.csproj",
       "packagesPath": "C:\\Users\\sergi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sergi\\source\\repos\\SeaBattle\\SeaBattle\\obj\\",
+      "outputPath": "C:\\Homework\\SeaBattle\\Sea-Battle\\SeaBattle\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
