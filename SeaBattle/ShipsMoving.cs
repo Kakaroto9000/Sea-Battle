@@ -29,12 +29,7 @@ namespace SeaBattle
             {
                 if (rotation == true)
                 {
-                    for (int j = 0; j < lenght; j++)
-                    {
-                        arena[x + j, y - 1] = '#';
-                        arena[x + j, y] = PreviosCoardinate[x + j, y];
-                    }   
-                    Ships[NumbOfShip].Coardinate = (x, y - 1);
+                    ShipsMovingUpDown(-1, Ships, arena, NumbOfShip, PreviosCoardinate);
                 }
                 else
                 {
@@ -47,12 +42,7 @@ namespace SeaBattle
             {
                 if (rotation == true)
                 {
-                    for (int j = 0; j < lenght; j++)
-                    {
-                        arena[x + j, y + 1] = '#';
-                        arena[x + j, y] = PreviosCoardinate[x + j, y];
-                        Ships[NumbOfShip].Coardinate = (x, y + 1);
-                    }
+                    ShipsMovingUpDown(+1, Ships, arena, NumbOfShip, PreviosCoardinate);
                 }
                 else 
                 {
@@ -71,12 +61,7 @@ namespace SeaBattle
                 }
                 else 
                 {
-                    for (int j = 0; j < lenght; j++)
-                    {
-                        arena[x, y + j] = PreviosCoardinate[x, y + j];
-                        arena[x - 1, y + j ] = '#';
-                        Ships[NumbOfShip].Coardinate = (x - 1, y);
-                    }
+                    ShipsMovingLeftRight(-1, Ships, arena, NumbOfShip, PreviosCoardinate);
                 }
             }
             else if (Direction == "Right")
@@ -89,14 +74,7 @@ namespace SeaBattle
                 }
                 else 
                 {
-
-                    for (int j = 0; j < lenght; j++)
-                    {
-                        arena[x, y + j] = PreviosCoardinate[x,y+j];
-                        Console.WriteLine(PreviosCoardinate[x,y+j]);
-                        arena[x + 1, y + j] = '#';
-                        Ships[NumbOfShip].Coardinate = (x + 1, y);
-                    }
+                    ShipsMovingLeftRight(+1, Ships, arena, NumbOfShip, PreviosCoardinate);
                 }
             }
             else if (Direction == "Rotate")
@@ -120,6 +98,26 @@ namespace SeaBattle
                     }
                 }
             }
+        }
+        private void ShipsMovingUpDown(int AddToMoving, Ship[] Ships, char[,] arena, int NumbOfShip, char[,] PreviosCoardinate)
+        {
+            (int x, int y) = Ships[NumbOfShip].Coardinate;
+            for (int j = 0; j < Ships[NumbOfShip].lenghts; j++)
+            {
+                arena[x + j, y + AddToMoving] = '#';
+                arena[x + j, y] = PreviosCoardinate[x + j, y];
+            }
+            Ships[NumbOfShip].Coardinate = (x, y + AddToMoving);
+        }
+        private void ShipsMovingLeftRight(int AddToMoving, Ship[] Ships, char[,] arena, int NumbOfShip, char[,] PreviosCoardinate)
+        {
+            (int x, int y) = Ships[NumbOfShip].Coardinate;
+            for (int j = 0; j < Ships[NumbOfShip].lenghts; j++)
+            {
+                arena[x, y + j] = PreviosCoardinate[x, y + j];
+                arena[x + AddToMoving, y + j] = '#';
+            }
+            Ships[NumbOfShip].Coardinate = (x + AddToMoving, y);
         }
     }
 }

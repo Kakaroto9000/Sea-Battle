@@ -10,7 +10,7 @@ namespace SeaBattle
     {
         public char[,] arena;
         public char[,] YourShoots;
-        public char[,] PreviosCoardinate;
+        public char[,] PreviosCoardinate ;
 
         public Ship[] Ships;
         private ShipsMoving shipsMoving = new ShipsMoving();
@@ -20,26 +20,26 @@ namespace SeaBattle
         public (int x, int y) CoardinatetoShoot;
 
         
-        public void ArenaCreator(char[,] arena)
+        public void ArenaCreator(ref char[,] arena)
         {
-            int numberofborder = 48;
             arena = new char[ArenaSize.x, ArenaSize.y];
             for (int i = 0; i < ArenaSize.y; i++)
             {
                 for (int j = 0; j < ArenaSize.x; j++)
                     if (j == 0)
                     {
-                        numberofborder = 48 + i;
+                        int numberofborder = 48 + i;
                         arena[0, i] = ((char)numberofborder);
                     }
                     else if (i == 0)
                     {
-                        numberofborder = 48 + j;
+                        int numberofborder = 48 + j;
                         arena[j, 0] = ((char)numberofborder);
                     }
-
                     else
+                    {
                         arena[j, i] = ' ';
+                    }
             }
         }
         public void ShipsCreator()
@@ -59,8 +59,12 @@ namespace SeaBattle
         private void ShipControler(int NumbOfShip)
         {
             for(int i = 0; i< ArenaSize.y; i++)
+            {
                 for (int j = 0; j < ArenaSize.x; j++)
+                {
                     PreviosCoardinate[j,i] = arena[j,i];
+                }
+            }
             AddShipToArena(NumbOfShip);
             string Direction;
             RevealBuilderShips();
@@ -106,24 +110,13 @@ namespace SeaBattle
             Console.WriteLine();
         }
         public char MakeShoot(int x, int y)
-        {
-            if (arena[x, y] == ' ')
+            => arena[x, y] switch
             {
-                arena[x, y] = '?';
-                return ('?');
-            }
-            else if (arena[x, y] == '#')
-            {
-                arena[x, y] = '$';
-                return ('$');
-            }
-            else if (arena[x, y] == '$')
-            {
-                arena[x, y] = '$';
-                return ('$');
-            }
-            else return '?';
-        }
+                ' ' => arena[x, y] = '?',
+                '#' => arena[x, y] = '$',
+                '$' => arena[x, y] = '$',
+                _ => '?'
+            };
         public void ChangeArenaAfterShoot(int x, int y, char ShotedTile)
         {
             YourShoots[x, y] = (char)ShotedTile;

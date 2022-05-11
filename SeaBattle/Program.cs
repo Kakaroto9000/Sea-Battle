@@ -8,67 +8,45 @@ namespace SeaBattle
 {
     internal class Program 
     {
-        static Player player1 = new Player();
-        static Player player2 = new Player();
-        static Arena arena1 = new Arena();
-        static Arena arena2 = new Arena();
+        static Game game = new Game();
+
+        static int FirstPlayerWins = 0;
+        static int SecondPlayerWins = 0;
         static void Main(string[] args)
         {
-            PreGameSetup();
-            while (player2.GameEndCheck(arena1) == false)
+            int NumberOfRounds = GetNumberOfRounds();
+            for (int i = 0; i < NumberOfRounds; i++)
             {
-                PlayerTurn(player1, ref arena1, ref arena2);
-                if (player1.GameEndCheck(arena2) == true)
+                int Whowin = game.StartRound();
+                AddWins(Whowin);
+                if (FirstPlayerWins*2 > NumberOfRounds || SecondPlayerWins*2 > NumberOfRounds)
+                {
                     break;
-                PlayerTurn(player2, ref arena2, ref arena1);
+                }
             }
-            if (player2.GameEndCheck(arena1) == false)
-            {
-                PostGame();
-                Console.WriteLine("Player 1 Win");
-            }
-            else
-            {
-                PostGame();
-                Console.WriteLine("Player 2 Win");
-            }
+            Console.Clear();
+            Console.WriteLine("{0} = First player wins", FirstPlayerWins);
+            Console.WriteLine("{0} = Second player wins", SecondPlayerWins);
             Console.ReadLine();
         }
-        static void PlayerTurn(Player player,ref Arena arena,ref Arena enemyarena)
+        static  void AddWins(int Whowin)
         {
-            player.TurnEnd = false;
-            Console.Clear();
-            arena.reveal(arena.arena);
-            arena.reveal(arena.YourShoots);
-            while(player.TurnEnd == false && player.GameEndCheck(enemyarena)==false)
-            {
-                player.Turn(ref arena,ref enemyarena);
-                Console.Clear();
-                arena.reveal(arena.arena);
-                arena.reveal(arena.YourShoots);
+            if (Whowin == 1) 
+                FirstPlayerWins++;
+            if (Whowin == 2)
+                SecondPlayerWins++;
+        }
+        static int GetNumberOfRounds()
+        {
+            Console.WriteLine("Write Number Of Matches");
+            string Input = Console.ReadLine();
+            int Result;
+            while (!int.TryParse(Input, out Result))
+            {   
+                Console.WriteLine("Write Number Of Matches");
+                Input = Console.ReadLine();
             }
-
-            Console.WriteLine("Press ENTER to end turn");
-            Console.ReadLine();
-        }
-        static void PreGameSetup()
-        {
-            ArenasCreations(ref arena1);
-            ArenasCreations(ref arena2);
-        }
-        static void ArenasCreations(ref Arena arena)
-        {
-            arena.ArenaCreator(ref arena.arena);
-            arena.ArenaCreator(ref arena.YourShoots);
-            arena.ShipsCreator();
-        }
-        static void PostGame()
-        {
-            Console.Clear();
-            Console.WriteLine("First Player Arena");
-            arena1.reveal(arena1.arena);
-            Console.WriteLine("Second Player Arena");
-            arena2.reveal(arena2.arena);
+            return Result;
         }
     }
 }
