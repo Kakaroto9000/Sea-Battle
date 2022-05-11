@@ -20,7 +20,7 @@ namespace SeaBattle
             else
                 Ships[i].lenghts = 4;
         }
-        public void ShipMove(string Direction,ref Ship[] Ships,ref char[,] arena,int NumbOfShip,char[,] PreviosCoardinate)
+        public void ShipMove(string Direction, Ship[] Ships, char[,] arena,int NumbOfShip,char[,] PreviosCoardinate)
         {
             (int x, int y) = Ships[NumbOfShip].Coardinate;
             int lenght = Ships[NumbOfShip].lenghts;

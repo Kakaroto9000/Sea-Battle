@@ -13,14 +13,14 @@ namespace SeaBattle
         public char[,] PreviosCoardinate;
 
         public Ship[] Ships;
-        private ShipsMoving shipsManager = new ShipsMoving();
+        private ShipsMoving shipsMoving = new ShipsMoving();
         static InputManager inputManager = new InputManager();
 
         public (int x, int y) ArenaSize = (10, 10);
         public (int x, int y) CoardinatetoShoot;
 
         
-        public void ArenaCreator(ref char[,] arena)
+        public void ArenaCreator(char[,] arena)
         {
             int numberofborder = 48;
             arena = new char[ArenaSize.x, ArenaSize.y];
@@ -52,7 +52,7 @@ namespace SeaBattle
             }
             for (int i = 0; i < Ships.Length; i++)
             {
-                shipsManager.ShipCreation(i,ref Ships);
+                shipsMoving.ShipCreation(i,ref Ships);
                 ShipControler(i);
             }
         }
@@ -69,7 +69,7 @@ namespace SeaBattle
             while ((Input != 'y' && Input != 'Y'))
             {
                 Direction = CheckIsCanMoved(inputManager.Movement(Input),NumbOfShip);
-                shipsManager.ShipMove(Direction, ref Ships,ref arena, NumbOfShip,PreviosCoardinate);
+                shipsMoving.ShipMove(Direction, Ships, arena, NumbOfShip,PreviosCoardinate);
                 RevealBuilderShips();
                 Input = Console.ReadKey().KeyChar;
             }
