@@ -8,11 +8,11 @@ namespace SeaBattle
 {
     public class Player
     {
-        public bool[,] IsPlaxeNotShooted = new bool[10,10];
+        private bool[,] IsPlaxeNotShooted = new bool[10,10];
         public bool IsBot = false;
         public bool TurnEnd = false;
         
-        public Random Random = new Random();
+        private Random Random = new Random();
         public void Turn(Arena arena,Arena enemyArena)
         {     
             (int X,int Y) = GetCordinateToShoot();

@@ -14,7 +14,7 @@ namespace SeaBattle
 
         public Ship[] Ships;
         private ShipsMoving shipsMoving = new ShipsMoving();
-        static InputManager inputManager = new InputManager();
+        private InputManager inputManager = new InputManager();
 
         public (int x, int y) ArenaSize = (10, 10);
         public (int x, int y) CoardinatetoShoot;
